@@ -36,16 +36,20 @@ public class BOJ_11000 {
 //        }
 
         PriorityQueue<Integer> tq = new PriorityQueue<>(); // 종료 시간
-        int end = 0;
         for (int i = 0; i < N; i++) {
             int[] time = pq.poll();
 
+            if(tq.size() != 0){
+                while(true){
+                    if(tq.size() == 0 || tq.peek() > time[0]) break;
+                    if(tq.peek() <= time[0]) tq.poll();
+                }
+            }
             tq.add(time[1]);
-            end = time[1];
 
             answer = Math.max(answer, tq.size());
-
         }
 
+        System.out.println(answer);
     }
 }
